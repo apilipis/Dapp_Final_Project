@@ -1,0 +1,158 @@
+@import "normalize.less";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 0.7em;
+}
+
+body {
+	font-family: "Maven Pro";
+	font-weight: 400;
+	line-height: 1.4;
+}
+
+nav {
+	background-color: #2980b9;
+	color: white;
+
+	* {
+		color: inherit !important;
+	}
+}
+
+.container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1rem 1rem 1rem 0;
+}
+
+#app {
+	display: block;
+	width: 100%;
+
+	.panel {
+		float: left;
+		width: auto;
+		display: inline-block;
+		height: 100%;
+	}
+
+	input {
+		width: 100% !important;
+		margin: 0.5rem 0 .5rem 0;
+		padding: 0.5rem;
+		box-sizing: border-box;
+	}
+
+	#profile {
+		float: right;
+		display: block;
+		width: 70%;
+
+		section {
+			margin-bottom: 2rem;
+			color: white;
+		}
+
+		section.info {
+			margin-top: 2rem;
+			padding: 1.5rem;
+			border-radius: 0.2rem;
+
+			img.picture {
+				width: 12rem;
+				height: 12rem;
+			}
+		}
+
+		section.posts {
+			.post {
+				margin-top: 2rem;
+				padding: 1.5rem;
+				border-radius: 0.2rem;
+
+				> .content {
+					margin-bottom: 1rem;
+				}
+
+				section.comments {
+					.comment {
+						margin-bottom: 1rem;
+					}
+
+					margin-left: 2rem;
+				}
+			}
+		}
+
+		input.name {
+			font-size: 2rem;
+		}
+
+		input.bio, input.comment, input.post {
+			font-size: 1.2rem;
+		}
+	}
+
+
+}
+
+@media (min-width: 600px) {
+	html {
+		font-size: 0.9em;
+	}
+
+	.container {
+		width: 55%;
+	}
+
+	.left {
+		float: left;
+	}
+
+	.right {
+		float: right;
+	}
+}
+
+a {
+	color: inherit;
+	color: #333;
+	text-decoration: inherit;
+}
+
+h1 {
+	font-size: 5rem;
+	margin-bottom: 2rem;
+	color: #111;
+}
+
+h2 {
+	font-size: 4rem;
+	color: #222;
+}
+
+h3 {
+	font-size: 3rem;
+	color: #333;
+}
+
+h4 {
+	font-size: 2.5rem;
+	color: #444;
+}
+
+h5 {
+	font-size: 1rem;
+	color: #555;
+}
+
+p {
+	font-size: 1.7rem;
+	color: #555;
+}
