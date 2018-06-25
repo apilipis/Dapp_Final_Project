@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Dappsocialnet</title>
+
+		<meta charset="utf-8">
+
+		<link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+		<link href="bundle.css" rel="stylesheet">
+
+	</head>
+	<body>
+
+		<nav>
+			<div class="container">
+				<h3>ethsocial</h3>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div id="app" style="display: none">
+
+				<div v-if="login">
+					<input v-model="address" placeholder="Enter a friend's account" v-on:keyup.enter="changeProfile(address)">
+
+					<div class="panel">
+						<h3><a href="#" v-on:click="changeProfile(userId)">My Account</a></h3>
+						<ul>
+							<li v-for="address in user.follows">
+								{{address}}
+							</li>
+						</ul>
+					</div>
+
+					<div id="profile">
+						<section class="info">
+							<img
+								v-if="!editingPicture && profile.pictureHash"
+								v-bind:src="profile.pictureUrl"
+								v-on:click="editingPicture = true"
+								class="picture"
+							>
+
+							<input
+								v-if="editingPicture || !profile.pictureHash"
+								class="picture"
+								v-model="newPicture"
+								v-on:keyup.enter="setPicture(newPicture)"
+								v-on:keyup.esc="editingPicture = false"
+								placeholder="Profile Picture IPFS Hash"
+							>
+
+							<h5 class="address">
+								<a href="#" v-on:click="changeProfile(profile.userId)" v-html="addressColors(profile.userId)">
+								</a>
+							</h5>
+
+							<span v-if="profile.userId == userId">
+								<a href="#" v-on:click="follow(profile.userId)">Follow</a>
+								<h3 v-if="!editingName && profile.name" v-on:click="editingName = true">{{profile.name}}</h3>
+
+								<input
+									v-if="editingName || !profile.name"
+									class="name"
+									v-model="newName"
+									v-on:keyup.enter="setName(newName)"
+									v-on:keyup.esc="editingName = false"
+									placeholder="What do you want to be called?"
+								>
+
+								<h4 v-if="!editingBio && profile.bio" v-on:click="editingBio = true">{{profile.bio}}</h4>
+								<input
+									v-if="editingBio || !profile.bio"
+									class="bio"
+									v-model="newBio"
+									v-on:keyup.enter="setBio(newBio)"
+									v-on:keyup.esc="editingBio = false"
+									placeholder="What would you say about yourself?"
+								>
+							</span>
+							<span v-else>
+								<a href="#" v-on:click="follow(profile.userId)">Follow</a>
+								<h3>{{profile.name}}</h3>
+								<h4>{{profile.bio}}</h4>
+							</span>
+
+							<input v-if="profile.userId == userId" v-model="newPost" v-on:keyup.enter="submitPost(newPost)" placeholder="What's on your mind?">
+						</section>
+
+						<section class="posts">
+							<h3>Posts</h3>
+
+							<div class="post" v-for="post in profile.posts">
+								<h5 class="address">
+									<a href="#" v-on:click="changeProfile(post.userId)" v-html="addressColors(post.userId)">
+									</a>
+								</h5>
+
+								<h4 class="content">{{post.content}}</h4>
+
+								<section class="comments">
+									<div class="comment" v-for="comment in post.comments">
+										<h5 class="address">
+											<a href="#" v-on:click="changeProfile(comment.userId)" v-html="addressColors(comment.userId)">
+											</a>
+										</h5>
+
+										<p class="content">{{comment.content}}</p>
+									</div>
+
+									<input class="comment" v-model="post.newComment" v-on:keyup.enter="submitComment(post.userId, post.postId, post.newComment)" placeholder="What do you think?">
+								</section>
+
+							</div>
+						</section>
+					</div>
+				</div>
+
+				<div v-else v-on:click="createAccount">
+					<a>Make an account!</a>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="bundle.js"></script>
+
+	</body>
+</html>
